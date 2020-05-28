@@ -35,12 +35,28 @@ public class MyTest extends BaseTest {
         String mail = driver.findElement(By.xpath("//span[@class='sn_menu_title']")).getText();*/
 
         Assert.assertEquals(app.dashboard.getLbUserEmail(), validUser.email);
+
+
+
+
         /*CommonHelper helper = new CommonHelper();
         helper.appStop();*/
 
 //        System.out.println();
 
 //        driver.quit();
+
+    }
+
+    @Test
+    public void test2() {
+        app.login.login(validUser);
+        app.dashboard.btnClickCreateEmail();
+        app.emailHelper.create(validEmail);
+
+        System.out.println();
+
+        Assert.assertEquals(app.dashboard.getLbUserEmail(), validEmail.emailRecipient);
 
     }
 }
