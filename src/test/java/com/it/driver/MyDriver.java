@@ -1,11 +1,17 @@
 package com.it.driver;
 
+import io.qameta.allure.Allure;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -49,12 +55,17 @@ public class MyDriver implements WebDriver {
 
 	@Override
 	public List<WebElement> findElements(By by) {
-		return driver.findElements(by);
+		List<WebElement> webElements = new ArrayList<>();
+		driver.findElements(by).forEach(s->
+				webElements.add(new WrappedWebElement(s))
+		);
+		return webElements;
 	}
 
 	@Override
-	public WebElement findElement(By by) {
-		return driver.findElement(by);
+	public WrappedWebElement findElement(By by) {
+		System.out.println("Hi");
+		return new WrappedWebElement(driver.findElement(by));
 	}
 
 	@Override
@@ -111,7 +122,8 @@ public class MyDriver implements WebDriver {
 	 */
 	public void scrollDown() {
 		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,document.body.scrollHeight)");
-}
+	}
+
 	/*public boolean isElementPresent(By locator) {
 		boolean result = false;
 		driver.manage().timeouts().
@@ -129,9 +141,15 @@ public class MyDriver implements WebDriver {
 	public void takeSnapShot() {
 		File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		try {
-			FileUtils.copyFile(screenshot, new File("build//screenshot//screen"+count+".png"));
+			FileUtils.copyFile(screenshot, new File("build//screenshot//screen" + count + ".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		Path content = Paths.get("build//screenshot//screen" + count + ".png");
+		try (InputStream is = Files.newInputStream(content)) {
+			Allure.addAttachment("My attachment", is);
+		} catch (IOException e) {
+			//NOP
 		}
 		count++;
 	}
