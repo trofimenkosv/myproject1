@@ -19,7 +19,9 @@ public class MyTest extends BaseTest {
         driver.get("https://www.i.ua/");*/
 
 //        LoginHelper login = new LoginHelper();
+
         app.login.login(validUser);
+        app.common.takeScreenShot();
 
         /*DashboardPage dashboardPage = new DashboardPage();
         String email = dashboardPage.getLbUserEmail();*/
@@ -50,7 +52,7 @@ public class MyTest extends BaseTest {
 
     @Test
     public void test2() {
-        app.login.login(validUser);
+        /*app.login.login(validUser);*/
         app.dashboard.btnClickCreateEmail();
         app.emailHelper.create(validEmail);
 

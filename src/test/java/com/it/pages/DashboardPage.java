@@ -10,7 +10,7 @@ public class DashboardPage extends BasePage {
     @FindBy(xpath = "//span[@class='sn_menu_title']")
     private WebElement ldUserEmail;
 
-    @FindBy(xpath = "//ul[@class=\"sn_menu\"]/li[2]/a")
+    @FindBy(xpath = "(//div//p/a)[1]")
     private WebElement btnCreateEmail;
 
 

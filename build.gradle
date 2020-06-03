@@ -17,6 +17,9 @@ dependencies {
     testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server
     compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '4.0.0-alpha-2'
+    // https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.io
+    compile group: 'org.apache.directory.studio', name: 'org.apache.commons.io', version: '2.4'
+
 }
 
 task chrome(type:Test) {

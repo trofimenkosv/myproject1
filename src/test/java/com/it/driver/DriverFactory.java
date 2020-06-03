@@ -6,9 +6,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.it.common.Constans.BASE_URL;
+import static com.it.common.Constants.BASE_URL;
 
-public class DriverFactory {
+ class DriverFactory {
 
     public static WebDriver getDriver() {
         WebDriver driver = null;
@@ -18,12 +18,12 @@ public class DriverFactory {
                 System.setProperty("webdriver.gecko.driver", "drivers/geckodriver26.exe");
                 driver = new FirefoxDriver();
             } else if ("chrome".equals(driverName))
-                System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "drivers/chromedriver83.exe");
             driver = new ChromeDriver();
 
 
         } else {
-            System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "drivers/chromedriver83.exe");
             driver = new ChromeDriver();
         }
         //driver = new ChromeDriver();
